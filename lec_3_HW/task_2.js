@@ -2,7 +2,7 @@ let x;
 let result;
 
 const getSolution = (a, b, c) => {
-    let D = b ^ (2 - 4 * a * c);
+    let D = b * b - 4 * a * c;
     if (D > 0) {
         x = (-b + Math.sqrt(D)) / (2 * a);
         result = `x1 = ${x}`;
