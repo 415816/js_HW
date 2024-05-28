@@ -1,7 +1,7 @@
 const sumCancat = n => {
-    let first = n;
-    let second = "" + n + n;
-    let third = "" + n + n + n;
+    const first = n;
+    const second = "" + n + n;
+    const third = "" + n + n + n;
 
     console.log(first + +second + +third);
 };
