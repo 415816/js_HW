@@ -2,7 +2,7 @@ let x;
 let result;
 
 const getSolution = (a, b, c) => {
-    let D = b ^ (2 - 4 * a * c);
+    let D = b * b - 4 * a * c;
     if (D > 0) {
         x = (-b + Math.sqrt(D)) / (2 * a);
         result = `x1 = ${x}`;
@@ -15,6 +15,4 @@ const getSolution = (a, b, c) => {
         return (result = "No roots");
     }
 };
-console.log(
-    `Ответ к уравнению 1: ${getSolution(1, -6, 9)}, Ответ к уравнению 2: ${getSolution(1, -4, -5)}`
-);
+console.log(`Ответ к уравнению 1: ${getSolution(1, -6, 9)}, Ответ к уравнению 2: ${getSolution(1, -4, -5)}`);
