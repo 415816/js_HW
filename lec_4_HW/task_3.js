@@ -2,7 +2,7 @@ let minAge = 18;
 let maxAge = 60;
 
 const checkAge = age => {
-    if (+age === NaN) {
+    if ((isNaN(age))) {
         alert("Please, enter a number");
     } else {
         switch (true) {
