@@ -54,7 +54,7 @@ let age;
 // ==========================================================================================================
 // 3.
 const checkAge = age => {
-    if (+age === NaN) {
+    if ((isNaN(age))) {
         console.log("Please, enter a number");
     } else {
         switch (true) {
