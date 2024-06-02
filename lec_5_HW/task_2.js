@@ -1,23 +1,19 @@
 //1.
 // ===========================================================================================================
-const currency = (value, units) => {
-    switch (units.toLowerCase()) {
-        case "kb":
-            return `${(value / 1000).toFixed(1)} kB`;
-        case "mb":
-            return `${(value / (1000 * 1000)).toFixed(1)} Mb`;
-        case "gb":
-            return `${(value / (1000 * 1000 * 1000)).toFixed(1)} Gb`;
-        case "tb":
-            return `${(value / (1000 * 1000 * 1000 * 1000)).toFixed(1)} Tb`;
-        default:
-            return "What is this, dude?!";
+const currency = value => {
+    let result = [value];
+    const units = ["B", "Kb", "Mb", "Gb", "Tb"];
+    let i = 0;
+    while ((result[i] / 1000).toFixed(1) > 1) {
+        result.push((result[i] / 1000).toFixed(1));
+        i++;
     }
+    return `${value} B = ${result[result.length - 1] + " " + units[result.length - 1]}`;
 };
 
-// console.log(currency(4548, "kB"));
-// console.log(currency(454548, "Kb"));
-// console.log(currency(1454548, "Mb"));
+console.log(currency(4548));
+console.log(currency(454548));
+console.log(currency(1454548));
 
 // 2.
 // ===========================================================================================================
@@ -61,4 +57,4 @@ const camelCaser = str => {
         .join("");
 };
 
-console.log(camelCaser("I am super engineer"));
+// console.log(camelCaser("I am super engineer"));
