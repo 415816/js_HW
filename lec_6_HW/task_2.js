@@ -55,10 +55,10 @@ const uniqueNumbers = numArr => {
 const checkPolindrom = word => {
     for (let i = 0; i < word.length; i++) {
         if (word[i] !== word[word.length - 1 - i]) {
-            return "This word is not a polindrom";
+            return false;
         }
     }
-    return "This word is a polindrom";
+    return false;
 };
 console.log(checkPolindrom("madam"));
 console.log(checkPolindrom("hello"));
