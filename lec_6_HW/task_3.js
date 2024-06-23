@@ -13,20 +13,6 @@ const sumDigits = num => {
 // console.log(sumDigits(123));
 // console.log(sumDigits(19));
 
-// const replaceSimilarLetters = str => {
-//     let newStr = "";
-//     for (let i = 0; i < str.length; i++) {
-//         if (str[i] === str[i + 1]) {
-//             newStr += String.fromCharCode(str.charCodeAt(i) + 1);
-//             i++;
-//             console.log(newStr);
-//         } else {
-//             newStr += str[i];
-//         }
-//     }
-//     return newStr;
-// };
-
 
 function nextChar(c) {
     return c === 'z' ? 'a' : String.fromCharCode(c.charCodeAt(0) + 1);
