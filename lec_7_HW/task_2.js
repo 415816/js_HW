@@ -1,3 +1,5 @@
+const { countVowels } = require("../helpers");
+
 const str = "I am the best AQA ever!";
 
 function replaceLetterToCount(str) {
@@ -7,7 +9,7 @@ function replaceLetterToCount(str) {
 
     for (let char of str) {
         if (char.match(/[a-z]/i)) {
-            count[char] = (count[char] || 0) + 1;
+            count[char] = count[char] ? count[char] + 1 : 1;
         }
     }
 
@@ -46,18 +48,12 @@ const actionPrices = prices => {
 // console.log(actionPrices(prices));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const sortByVowelCount = words => {
-    function countVowels(word) {
-        const vowels = /[aeiou]/g;
-        let matches = word.toLowerCase().match(vowels);
-        return matches ? matches.length : 0;
-    }
-
     return words.sort((a, b) => countVowels(a) - countVowels(b));
 };
 
 let words = ["one", "two", "three", "eleven", "fourteen"];
 let sortedWords = sortByVowelCount(words);
-// console.log(sortedWords);
+console.log(sortedWords);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function countBrackets(arr) {
     let flatArray = arr.flat(Infinity);
@@ -70,5 +66,5 @@ function countBrackets(arr) {
 let bracketsArrayFalse = ["(", ["("], ")", "(", "(", "(", [[")"], ")"], ")", ")", ")"];
 let bracketsArrayTrue = ["(", ["("], ")", "(", "(", "(", [[")"], ")"], ")", ")"];
 
-console.log(countBrackets(bracketsArrayFalse));
-console.log(countBrackets(bracketsArrayTrue));
+// console.log(countBrackets(bracketsArrayFalse));
+// console.log(countBrackets(bracketsArrayTrue));
