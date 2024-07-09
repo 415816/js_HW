@@ -76,15 +76,30 @@ function getEnterpriseName(identifier) {
             }
         }
     }
-    return null;
+    throw new Error("Department not found");
 }
 
 // console.log(getEnterpriseName(4));
 // console.log(getEnterpriseName("Отдел маркетинга"));
 
 // 3. ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getUniqueDepartmentsIds(enterprises) {
+    let maxIdEnterprise = 0;
+    let maxIdDepartment = 0;
+    let maxId = 0;
+
+    enterprises.forEach(enterprise => {
+        maxIdEnterprise = Math.max(maxIdEnterprise, enterprise.id);
+        enterprise.departments.forEach(department => {
+            maxIdDepartment = Math.max(maxIdDepartment, department.id);
+        });
+        maxId = Math.max(maxId, maxIdEnterprise, maxIdDepartment);
+    });
+    return maxId + 1;
+}
+
 function addEnterprise(name) {
-    const newId = enterprises.reduce((maxId, enterprise) => Math.max(maxId, enterprise.id), 0) + 1;
+    const newId = getUniqueDepartmentsIds(enterprises);
     enterprises.push({
         id: newId,
         name: name,
@@ -99,9 +114,7 @@ function addEnterprise(name) {
 function addDepartment(enterpriseId, departmentName) {
     const enterprise = enterprises.find(enterprise => enterprise.id === enterpriseId);
     if (enterprise) {
-        const newId =
-            enterprises.flatMap(e => e.departments).reduce((maxId, department) => Math.max(maxId, department.id), 0) +
-            1;
+        const newId = getUniqueDepartmentsIds(enterprises);
         enterprise.departments.push({
             id: newId,
             name: departmentName,
@@ -111,7 +124,7 @@ function addDepartment(enterpriseId, departmentName) {
 }
 
 // addDepartment(1, "NewDepartment_1");
-// console.log(enterprises);
+// console.log(enterprises[0].departments);
 
 // 5. ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function editEnterprise(enterpriseId, newName) {
@@ -164,12 +177,11 @@ function deleteDepartment(departmentId) {
 
 // 9. ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function moveEmployees(fromDepartmentId, toDepartmentId) {
-    const fromDepartment = enterprises
-        .flatMap(e => e.departments)
-        .find(department => department.id === fromDepartmentId);
-    const toDepartment = enterprises.flatMap(e => e.departments).find(department => department.id === toDepartmentId);
+    const departments = enterprises.flatMap(e => e.departments);
+    const fromDepartment = departments.find(department => department.id === fromDepartmentId);
+    const toDepartment = departments.find(department => department.id === toDepartmentId);
 
-    if (fromDepartment && toDepartment) {
+    if (fromDepartment && toDepartment && fromDepartment !== toDepartment) {
         toDepartment.employees_count += fromDepartment.employees_count;
         fromDepartment.employees_count = 0;
     }
