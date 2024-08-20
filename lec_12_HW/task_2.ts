@@ -5,8 +5,8 @@
 //    Пример:
 //    map([1,2,3,4,5], callback) => [0,2,6,12,20]
 
-function map<T, P>(array: T[], callback: (elem: T, index: number) => P): P[] {
-    let result: P[] = [];
+function map<T, P>(array: T[], callback: (elem: T, index?: number, oArray?: readonly T[]) => P): P[] {
+    const result: P[] = [];
 
     for (let i = 0; i < array.length; i++) {
         result.push(callback(array[i], i));
@@ -14,8 +14,7 @@ function map<T, P>(array: T[], callback: (elem: T, index: number) => P): P[] {
     return result;
 }
 
-console.log(map([1, 2, 3, 4, 5], (elem, index) => elem * index));
-
+console.log(map([1, 2, 3, 4, 5], (elem, index) => elem * (index ?? 0)));
 
 // 2. Напишите дженерик функцию generateObject, которая принимает массив пар [string, T]
 //   и возвращает объект, где каждая пара ключ-значение из массива превращается в соответствующую пару ключ-значение в объекте.
@@ -27,22 +26,39 @@ console.log(map([1, 2, 3, 4, 5], (elem, index) => elem * index));
 type Pair<T> = [string, T];
 type ObjectResult<T> = { [key: string]: T };
 
-function generateObject<T>(array: Pair<T>[]): ObjectResult<T> {
-	let result: ObjectResult<T> = {};
+// function generateObject<T>(array: Pair<T>[]): ObjectResult<T> {
+//     const result: ObjectResult<T> = {};
 
-	for (let i = 0; i < array.length; i++) {
-		result[array[i][0]] = array[i][1];
-	}
-	return result;
+//     for (let i = 0; i < array.length; i++) {
+//         result[array[i][0]] = array[i][1];
+//     }
+//     return result;
+// }
+
+// OR
+
+// function generateObject<T>(array: Pair<T>[]): ObjectResult<T> {
+//     const result: ObjectResult<T> = {};
+//     for (const [key, value] of array) {
+//         result[key] = value;
+//     }
+//     return result;
+// }
+
+// OR
+function generateObject<T>(array: Pair<T>[]): ObjectResult<T> {
+	return Object.fromEntries(array);
 }
 
-console.log(generateObject([
-	["1", 1],
-	["2", 2],
-	["3", 3],
-	["4", 4],
-	["4", 5],
-]));
+console.log(
+    generateObject([
+        ["1", 1],
+        ["2", 2],
+        ["3", 3],
+        ["4", 4],
+        ["4", 5],
+    ]),
+);
 //   Пример:
 //   const result = generateObject([
 //   ["1", 1],

@@ -1,7 +1,7 @@
 // 1. Создайте дженерик функцию getFirstElement, которая принимает массив элементов типа T, и возвращает первый элемент (типа T).
 
 function getFirstElement<T>(array: T[]) {
-    return array[1];
+    return array[0];
 }
 
 console.log(getFirstElement([4, 5, 3, 1, 2]));
